@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./mc.png">
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Outfit:wght@400;900&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <title>Simulation App</title>
+</head>
+<body>
+    <div class="box">
+        <div class="settings-box">
+            <div class="input-file-box">
+                <label for="file-upload">Choose files:</label>
+                <input type="file" id="file-upload" name="file-upload">
+                <div class="upload-buttons">
+                    <button id="load" onclick="loadCSV()" class="submit-button" type="submit">Upload</button>
+                    <button id="read" onclick="readCSV()" class="submit-button" type="submit">Read Data</button>
+                </div>
+                <p id="warning-csv" class="warning">Please insert csv file</p>
+                <p id="warning-success" class="warning">Upload data success</p>
+                <p id="warning-read" class="warning">Data is not fully loaded</p>
+            </div>
+            <div class="input-parameter-box">
+                <div class="input-parameter">
+                    <label for="columns">Choose a column:</label><br>
+                    <select id="columns" name="columns" class="input-number">
+                        <option value="default">(default)</option>
+                    </select><br>
+                    <label for="number-m">Input m value :</label>
+                    <input type="number" class="input-number" name="number-m" id="number-m"><br>
+                    <label for="number-a">Input a value :</label>
+                    <input type="number" class="input-number" name="number-a" id="number-a"><br>
+                    <label for="number-c">Input c value :</label>
+                    <input type="number" class="input-number" name="number-c" id="number-c"><br>
+                    <label for="seed">Input seed value :</label>
+                    <input type="number" class="input-number" name="seed" id="seed"><br>
+                    <label for="outsample">Input outsample percentage :</label><br>
+                    <input type="number" class="input-number" name="outsample" id="outsample" max="100" min="0"> %<br>
+                    <p id="valid-check" class="warning">The parameter is not fullfil the criteria</p>
+                    <button type="submit" onclick="createPrediction()" class="submit-button" id="predict-button">Try Predict</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-box">
+            <table class="tablebase" id="data-table"></table>
+            <p class="info"></p>
+        </div>
+    </div>
+    <div class="graph-box box">
+        <div class="inner-graph-box">
+            <div class="table-frequency">
+                <table class="tablebase" id="frequency"></table>
+            </div>
+            <div class="graph"></div>
+            <div class="graph-selector-box">
+                <select onchange="changeGraph()" name="graph-selector" id="graph-selector" class="selector">
+                    <option value="outsample">Outsample</option>
+                    <option value="insample">Insample</option>
+                    <option value="allData">All Data</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button onclick="showResult()" id="result">Show The Result</button>
+    <div class="result-box">
+        <p class="mape" id="insample-mape"></p>
+        <p class="mape" id="outsample-mape"></p>
+        <p class="mape" id="overall-mape"></p>
+        <table id="result-table"></table>
+    </div>
+    <p class="developer">Create by <a href="https://github.com/zainic">Zainic</a></p>
+</body>
+</html>
